@@ -1,47 +1,22 @@
-from tkinter import*
-from tkinter.ttk import*
+from tkinter import *
 
-root = Tk()
+root=Tk()
+
 root.geometry("400x400")
-root.title("Menu")
+root.title("scrollwheel")
 
-menu_bar = Menu(root)
+label = Label(root,text="welcome",bg="white",fg="black")
+label.pack()
 
-file = Menu(menu_bar,tearoff=0)
-menu_bar.add_cascade(label="File",menu=file)
+scroll_bar = Scrollbar(root)
+scroll_bar.pack(side=RIGHT,fill=Y)
 
-file.add_command(label="new File",command=None)
-file.add_command(label="Open...",command=None)
-file.add_command(label="Save",command=None)
+listbox = Listbox(root,yscrollcommand=scroll_bar.set)
+for i in range(1,101):
+    listbox.insert(END,"hi"+str(i))
+listbox.pack()
 
-file.add_separator()
-file.add_command(label="Exit",command=root.destroy)
-
-#-----------------------------------------------------------------------------------------------------
-
-edit = Menu(menu_bar,tearoff=0)
-menu_bar.add_cascade(label="Edit",menu=edit)
-
-edit.add_command(label="Undo",command=None)
-edit.add_command(label="Redo",command=None)
-
-edit.add_separator()
-edit.add_command(label="Cut",command=None)
-edit.add_command(label="Copy",command=None)
-
-#-----------------------------------------------------------------------------------------------------
-
-veiw = Menu(menu_bar,tearoff=0)
-menu_bar.add_cascade(label="Veiw",menu=veiw)
-
-veiw.add_command(label="Command Palette",command=None)
-veiw.add_command(label="Open View",command=None)
-
-veiw.add_separator()
-
-veiw.add_command(label="Run",command=None)
-veiw.add_command(label="Chat",command=None)
+scroll_bar.config(command=listbox.yview)
 
 
-root.config(menu = menu_bar)
 root.mainloop()
